@@ -26,6 +26,8 @@ body {
     align-items: center; /* Align items vertically */
   
 }
+
+
  
 .button, .login-button {
     background-color: #800000; /* Default background color */
