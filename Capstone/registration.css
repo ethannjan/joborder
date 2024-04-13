@@ -1,0 +1,103 @@
+body {
+    background-color: #FFD700;
+    margin: 0; /* Remove default body margin */
+    overflow: hidden;
+   
+    
+}
+
+.h1 {
+    font-family: 'Inter', sans-serif; 
+    margin-top: 100px;
+}
+
+.h2 {
+    font-family: 'Inter', sans-serif; 
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+    
+
+}
+
+.h3 {
+    font-family: 'Inter', sans-serif; 
+    font-weight: bold;
+    text-align: center;
+    color: #FFD700;
+}
+
+header {
+    text-align: center; /* Center align the content within the header */
+}
+
+.header-content {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center align items vertically */
+    justify-content: center; /* Center align items horizontally */
+}
+
+.logo {
+    max-width: 130px; /* Set maximum width for the logo */
+    margin-right: 20px; /* Add some space between the logo and the heading text */
+    margin-top: 80px;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Make the container full height of the viewport */
+}
+
+.form-container {
+    width: 600px; /* Increase the width to 600px (for example) */
+    margin: 0 auto; /* Center align the container horizontally */
+    padding: 20px; /* Add padding inside the container */
+    background-color: #800000; /* Red square border */
+    text-align: center; /* Center align content */
+    border: 2px solid #800000; /* Red square border */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    box-sizing: border-box; /* Include padding and border in the width */
+    color: #ffffff; /* Set font color to white (for example) */
+    position: absolute; /* Position the container absolutely */
+    top: 50%; /* Adjust as needed */
+    left: 50%; /* Center align horizontally */
+    transform: translate(-50%, -50%); /* Center align vertically */
+}
+
+
+
+.registration-form {
+    margin: 0; /* Remove default margins to prevent extra space around the form */
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column; /* Align inputs vertically */
+    align-items: center; /* Center inputs horizontally */
+    width: 300px;
+    margin: 0 auto;
+}
+
+.registration-form input[type="username"],
+.registration-form input[type="email"],
+.registration-form input[type="password"],
+.registration-form input[type="contactnum"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.registration-form input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
