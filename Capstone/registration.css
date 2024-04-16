@@ -123,4 +123,12 @@ header {
     border: 1px solid #ccc;
 }
 
-
+.registration-form input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
