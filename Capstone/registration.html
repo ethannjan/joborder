@@ -22,22 +22,79 @@
     <h2 class="h2">General Services Portal</h2>
     <div class="container">
         <div class="form-container">
-            <form action="action_page.php" class="registration-form">
+        <div class="registration-form">
                 <h3 class="h3">Create Account</h3>
                 <div class="input-container">
-                    <input type="username" placeholder="Username" name="user" required>
-                    <input type="password" placeholder="Password" name="pass" required>
-                    <input type="email" placeholder="Email" name="email" required>
-                    <input type="contactnum" placeholder="Contact Number" name="contact" required>
+                    <input type="text" id="username"   placeholder="Username" name="username" required>
+                    <input type="text" id="email"   placeholder="Email" name="email" required>
+                    <input type="text" id="password" placeholder="Password" name="pass" required>
+                    <input type="text" id="contactnum" placeholder="Contact Number" name="contact" required>
                     <div class=" buttoncontainer">
-                        <button class="button">Sign up</button>
-                        <button class="login-button">Login</button>
-                      </div>
+                    <input type="submit" id="signup" name="signup" value="Sign-up">
+                    <input type="submit" id="login" name="login" value="Login">
+                    </div>       
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     
 
 </body>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDOGLdnSeoUG4JDCVGyL6rmLAPOEG-eNbw",
+      authDomain: "joborder-e2a29.firebaseapp.com",
+      databaseURL: "https://joborder-e2a29-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "joborder-e2a29",
+      storageBucket: "joborder-e2a29.appspot.com",
+      messagingSenderId: "1071229990351",
+      appId: "1:1071229990351:web:6d337a8d39f855f085ceba"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+    signup.addEventListener('click', (e) => {
+
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var username = document.getElementById('username').value;
+        var contactnum = document.getElementById('contactnum').value;
+
+        createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+
+    set(ref(database, 'users/' + user.uid), {
+        username: username,
+        email: email,
+        password: password,
+        contactnum: contactnum
+
+    })
+
+    alert('User Created!');
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+
+    alert(errorMessage);
+    // ..
+  });
+
+    });
+  </script>
 </html>
