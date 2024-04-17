@@ -24,14 +24,15 @@ body {
     display: flex;
     justify-content: space-between; /* Align items with space between them */
     align-items: center; /* Align items vertically */
+    display: inline-block;
   
 }
 
 
  
 .button, .login-button, .registration-form input[type="submit"]{
-    background-color: #800000; /* Default background color */
-    color: #FFD700; /* Text color */
+    background-color: #FFD700; /* Default background color */
+    color: #000000; /* Text color */
     padding: 10px 20px; /* Padding */
     border: none; /* No border */
     border-radius: 5px; /* Rounded corners */
@@ -40,13 +41,13 @@ body {
   }
   
   .button:hover {
-    background-color: #0056b3; /* Background color on hover */
+    background-color: #FFC300; /* Background color on hover */
   }
   .login-button:hover {
-    background-color: #0056b3; /* Background color on hover */
+    background-color: #FFC300; /* Background color on hover */
   }
   .registration-form input:hover[type="submit"] {
-    background-color: #0056b3; /* Background color on hover */
+    background-color: #FFC300; /* Background color on hover */
   }
 
 
@@ -107,6 +108,7 @@ header {
     margin: 0; /* Remove default margins to prevent extra space around the form */
 }
 
+
 .input-container {
     display: flex;
     flex-direction: column; /* Align inputs vertically */
@@ -114,6 +116,8 @@ header {
     width: 300px;
     margin: 0 auto;
 }
+
+
 
 .registration-form input[type="text"] {
     width: 100%;
