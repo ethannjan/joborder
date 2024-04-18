@@ -1,0 +1,153 @@
+body {
+    background-color: #FFD700;
+    margin: 0; /* Remove default body margin */
+    overflow: hidden;
+   
+    
+}
+
+.h1 {
+    font-family: 'Inter', sans-serif; 
+}
+
+.h2 {
+    font-family: 'Inter', sans-serif; 
+    font-weight: bold;
+    text-align: center;
+    margin-top: 100px;
+}
+.h3 {
+    font-family: 'Inter', sans-serif; 
+    font-weight: bold;
+    text-align: center;
+    color: #FFD700;
+}
+
+header {
+    text-align: center; /* Center align the content within the header */
+}
+
+.header-content {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center align items vertically */
+    justify-content: center; /* Center align items horizontally */
+}
+
+.logo {
+    max-width: 130px; /* Set maximum width for the logo */
+    margin-right: 20px; /* Add some space between the logo and the heading text */
+}
+
+.h1 {
+    margin: 0; /* Remove default margins for the heading */
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Make the container full height of the viewport */
+}
+
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px; /* Add padding inside the container */
+    background-color: #800000; /* Red square border */
+    text-align: center; /* Center align content */
+    border: 2px solid #800000; /* Red square border */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    box-sizing: border-box; /* Include padding and border in the width */
+    margin-top: -350px;
+}
+
+.registration-form {
+    margin: 0; /* Remove default margins to prevent extra space around the form */
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column; /* Align inputs vertically */
+    align-items: center; /* Center inputs horizontally */
+}
+
+
+.ticket-form {
+        display: flex;
+        flex-direction: column;
+    }   
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="contactnum"],
+    textarea,
+    select {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    
+    
+    button {
+        padding: 10px 20px;
+        background-color: #FFD700; /* Change to your desired color */
+        color: #000000;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: #FFC300;
+    }
+
+    .ticket-form-container {
+        width: 100%;
+        max-width: 800px;
+        padding: 20px; /* Add padding inside the container */
+        background-color: #800000; /* Red square border */
+        text-align: center; /* Center align content */
+        border: 2px solid #800000; /* Red square border */
+        border-radius: 10px; /* Add border radius for rounded corners */
+        box-sizing: border-box; /* Include padding and border in the width */
+        margin-top: -350px;
+    }
+
+    .ticket-input-container {
+        display: flex;
+        flex-direction: column; /* Align inputs vertically */
+        align-items: flex-start; /* Center inputs horizontally */
+    }
+
+    
+
+    textarea {
+        height: 150px;
+        width: 730px; /* Increase the height as needed */
+        resize: vertical; /* Allow vertical resizing */
+    }
+
+    .select-container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+    
+    .select-container label {
+        margin-bottom: 5px;
+    }
+
+    .small-button {
+        width: 120px; /* Adjust width as needed */
+        display: inline-block; /* Display buttons inline */
+    }
+    
+    
+    
+
+
+
