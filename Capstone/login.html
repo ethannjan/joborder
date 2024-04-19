@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@240&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="registration.css">
+  <link rel="stylesheet" href="login.css">
 </head>
 
 <body>
@@ -24,19 +24,21 @@
   <h2 class="h2">General Services Portal</h2>
   <div class="container">
     <div class="form-container">
-      <form action="" class="registration-form">
+      <form action="" class="login-form">
         <h3 class="h3">Sign in</h3>
         <div class="input-container">
-          <input type="email" id="email" placeholder="Email" name="user" required>
-          <input type="password" id="password" placeholder="Password" name="pass" required>
-          <div class=" buttoncontainer">
-            <input type="submit" id="submit" name="Login" value="Login">
+          <div class="inputs">
+            <input type="email" id="email" placeholder="Email" name="user" class="input-field" required>
+            <input type="password" id="password" placeholder="Password" name="pass" class="input-field" required>
           </div>
-        </div>
+            <div class=" buttoncontainer">
+              <input type="submit" id="submit" name="Login" value="Login" class="login-button">
+              <button class="button" id="signup-button">Sign Up</button>
+            </div>
+          <p class="forgot-password"><a href="changepass.html">Forgot password?</a></p>
+        </div>   
       </form>
-      <p class="forgot-password"><a href="changepass.html">Forgot password?</a></p>
       <hr>
-      <button class="signup-button"><a href="registration.html">Sign Up</a></button>
     </div>
   </div>
 
@@ -59,6 +61,10 @@
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+
+  document.getElementById("signup-button").addEventListener("click", function() {
+    window.location.href = "registration.html"; // Redirect to registration page
+});
 
   const submit = document.getElementById('submit');
   submit.addEventListener("click", function(event) {

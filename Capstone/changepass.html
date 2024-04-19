@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +13,7 @@
 
     <link rel="stylesheet" href="changepass.css">
 </head>
+
 <body>
 
     <header>
@@ -22,22 +25,18 @@
     <h2 class="h2">General Services Portal</h2>
     <div class="container">
         <div class="form-container">
-            <form action="action_page.php" class="registration-form">
-                <h3 class="h3">Change Password</h3>
+            <form id="changePasswordForm" class="registration-form">
+                <h3 class="h3">Please input your email</h3>
                 <div class="input-container">
-                    <input type="username" placeholder="Username" name="user" required>
-                    <input type="newpassword" placeholder="New password" name="newpass" required>
-                    <input type="renewpassword" placeholder="Re-enter newpassword" name="renewpass" required>
-                    
-                   
-                    <div class=" buttoncontainer">
-                        <button class="button">Save</button>
-                      </div>
+                    <input type="email" id="email" placeholder="Email" name="email" required>
+                    <div class="buttoncontainer">
+                        <button type="button" id="searchEmailButton" class="button">Search</button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
-    
 
 </body>
+
 </html>

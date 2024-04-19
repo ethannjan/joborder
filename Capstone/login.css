@@ -1,15 +1,16 @@
 body {
     background-color: #FFD700;
     margin: 0;
+    overflow: hidden;
 }
 
 .h1 {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif; 
     margin-top: 100px;
 }
 
 .h2 {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif; 
     font-weight: bold;
     text-align: center;
     margin-top: 40px;
@@ -17,10 +18,11 @@ body {
 
 .buttoncontainer {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.login-button {
+.button, .login-button {
     background-color: #FFD700;
     color: #000000;
     padding: 10px 20px;
@@ -28,17 +30,23 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    align-items: center;
+    margin-right: 10px;
 }
 
-.login-button:hover {
+.button:hover, .login-button:hover {
     background-color: #FFC300;
 }
 
 .h3 {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif; 
     font-weight: bold;
     text-align: center;
     color: #FFD700;
+}
+
+header {
+    text-align: center;
 }
 
 .header-content {
@@ -75,3 +83,36 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.login-form {
+    margin: 0;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+.inputs {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 100%; /* Make the inputs wider */
+}
+
+.inputs .input-field {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    height: 20px;
+}
+.input-container .forgot-password a {
+    color: #ffffff; /* Change the text color to a dark red (#800000) */
+}
+
+
