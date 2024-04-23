@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Order</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@240&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <img src="C:\Users\ajceq\OneDrive\Desktop\Capstone\joborder\Capstone\images\logo.png" class="logo">
+            <h1 class="h1">CEBU INSTITUTE OF TECHNOLOGY - UNIVERSITY</h1>
+        </div>
+    </header>
+    <h2 class="h2">General Services Portal</h2>
+    <div class="container">
+            <div class="buttoncontainer">
+                <button class="ticket-button" id="ticketButton">Submit Ticket</button>
+                <button class="view-button" id="viewButton">View Tickets</button>
+            </div>
+        <button class="logout-button" id="logoutButton">Logout</button>
+    </div>
+    
+
+<script>
+    document.getElementById("ticketButton").addEventListener("click", function() {
+        window.location.href = "ticket.html";
+    });
+</script>
+
+</body>
+</html>
