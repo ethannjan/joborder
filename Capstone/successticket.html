@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Successfully Submitted</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@240&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="successticket.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <img src="C:\Users\ajceq\OneDrive\Desktop\Capstone\joborder\Capstone\images\logo.png" class="logo">
+            <h1 class="h1">CEBU INSTITUTE OF TECHNOLOGY - UNIVERSITY</h1>
+        </div>
+    </header>
+    <h2 class="h2">General Services Portal</h2>
+    <div class="container">
+        <div class="form-container">
+                <h3 class="h3">TICKET SUBMITTED!</h3>
+                <p class="p">Please wait for the notification from the PCO Staff for approval.</p>
+                    <div class="buttoncontainer">
+                        <button class="back-button" id="backButton">Go back</button>
+                      </div>
+                </div>
+        </div>
+    </div>
+    
+
+<script>
+    document.getElementById("backButton").addEventListener("click", function() {
+        window.location.href = "dashboard.html";
+    });
+</script>
+
+</body>
+</html>
