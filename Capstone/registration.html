@@ -42,84 +42,53 @@
 </body>
 
 <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyDOGLdnSeoUG4JDCVGyL6rmLAPOEG-eNbw",
-      authDomain: "joborder-e2a29.firebaseapp.com",
-      databaseURL: "https://joborder-e2a29-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "joborder-e2a29",
-      storageBucket: "joborder-e2a29.appspot.com",
-      messagingSenderId: "1071229990351",
-      appId: "1:1071229990351:web:6d337a8d39f855f085ceba"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-    const auth = getAuth();
-    signup.addEventListener('click', (e) => {
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+  import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
-        var username = document.getElementById('username').value;
-        var contactnum = document.getElementById('contactnum').value;
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDOGLdnSeoUG4JDCVGyL6rmLAPOEG-eNbw",
+    authDomain: "joborder-e2a29.firebaseapp.com",
+    databaseURL: "https://joborder-e2a29-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "joborder-e2a29",
+    storageBucket: "joborder-e2a29.appspot.com",
+    messagingSenderId: "1071229990351",
+    appId: "1:1071229990351:web:6d337a8d39f855f085ceba"
+  };
 
-        createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-
-    set(ref(database, 'users/' + user.uid), {
-        username: username,
-        email: email,
-        password: password,
-        contactnum: contactnum
-
-    })
-
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+  const auth = getAuth();
+  signup.addEventListener('click', (e) => {
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+      var username = document.getElementById('username').value;
+      var contactnum = document.getElementById('contactnum').value;
+      createUserWithEmailAndPassword(auth, email, password)
+.then((userCredential) => {
+  // Signed up 
+  const user = userCredential.user;
+  set(ref(database, 'users/' + user.uid), {
+      username: username,
+      email: email,
+      password: password,
+      contactnum: contactnum
+  }).then(() => {
     alert('User Created!');
     window.location.href = "successaccountcreation.html";
-    // ...
   })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-    alert(errorMessage);
-    // ..
+})
+.catch((error) => {
+  const errorCode = error.code;
+  const errorMessage = error.message;
+  alert(errorMessage);
+  // ..
+});
   });
-
-    });
-
-    login.addEventListener('click',(e)=>{
-      var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
-
-        signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential)=>{
-
-      const user = userCredential.user;
-
-      const dt = new Date();
-      update(ref(database, 'users/' + user.uid), {
-        last_login: dt,
-
-        })
-        alert('User Logged in');
-      })
-        .catch((error)=>{
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        alert(errorMessage);
-      });
-    });
-  </script>
+</script>
 </html>
