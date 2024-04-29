@@ -24,35 +24,87 @@
         <div class="ticket-form-container">
             <button type="home" class="small-button">Home</button>
             <button type="my-tickets" class="small-button">My Tickets</button>
-            <form action="submit_request.php" class="ticket-form" method="post">
+            <form action="" class="ticket-form" method="post">
                 <h3 class="h3">Submit a request</h3>
                 <div class="ticket-input-container">
                     <div class="select-container">
-                        <select name="request_type" required>
-                            <option value="">Select Request Type</option>
+                     
+                        <input type="email" placeholder="Enter email" name="email" id="EmailInp" required>
+
+                        <select id="ReqInp" required>
+                            <option value="" disabled selected hidden>Select Request Type</option>
                             <option value="Maintenance">Maintenance</option>
                             <option value="Repair">Repair</option>
                             <option value="Installation">Installation</option>
                             <option value="Other">Other</option>
                         </select>
-                        <select name="inquiry_type" required>
-                            <option value="">Select Type of Inquiry</option>
-                            <!--<option value="Technical">Technical</option>
+
+                        <select id="InqInp" required>
+                            <option value="" disabled selected hidden >Select Type of Inquiry</option>
+                          <option value="Technical">Technical</option>
                             <option value="General">General</option>
                             <option value="Billing">Billing</option>
-                            <option value="Other">Other</option>-->
+                            <option value="Other">Other</option>
                         </select>
-                        <input type="text" placeholder="Subject" name="subject" required>
-                        <input type="text" placeholder="Location" name="location" required>
-                        <textarea placeholder="Description" name="description" required></textarea>
-                        <button type="submit">Submit</button>
+
+                        <input type="text" placeholder="Subject" name="subject" id="SubInp" required>
+
+                        <input type="text" placeholder="Location" name="location" id="locInp" required>
+
+                        <textarea placeholder="Description" name="description" id="DesInp" required></textarea>
+
+                        <button type="submit" id="AddBtn">Submit</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
     
-    
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDOGLdnSeoUG4JDCVGyL6rmLAPOEG-eNbw",
+          authDomain: "joborder-e2a29.firebaseapp.com",
+          databaseURL: "https://joborder-e2a29-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "joborder-e2a29",
+          storageBucket: "joborder-e2a29.appspot.com",
+          messagingSenderId: "1071229990351",
+          appId: "1:1071229990351:web:6d337a8d39f855f085ceba"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        import {getDatabase,ref, child, set} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+        const db = getDatabase();
+        let EmailInp = document.getElementById('EmailInp');
+        let ReqInp = document.getElementById('ReqInp');
+        let InqInp = document.getElementById('InqInp');
+        let SubInp = document.getElementById('SubInp');
+        let locInp = document.getElementById('locInp');
+        let DesInp = document.getElementById('DesInp');
+
+        let Addbtn = document.getElementById('Addbtn');
+
+        function AddData(){
+            set(ref(db,'RequestSet/' + EmailInp.value ),{
+                email:EmailInp.value,
+                Details: {Request: ReqInp.value, Inquiry: InqInp.value, Subject: SubInp.value, Location: locInp.value, Description: DesInp.value }
+            }).then(()=>{
+                alert("Data Added Successfully");
+            })
+            .catch(()=>{
+                alert("Unsuccessful");
+                console.log(error);
+            })
+        }
+      </script>
 
 </body>
 </html>
