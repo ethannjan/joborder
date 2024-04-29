@@ -25,11 +25,45 @@
                 <button class="ticket-button" id="ticketButton">Submit Ticket</button>
                 <button class="view-button" id="viewButton">View Tickets</button>
             </div>
+            <div class="user-info">
+            <h3 id="msg"></h3>
+            <h3 id="greet"></h3>
         <button class="logout-button" id="logoutButton">Logout</button>
+            </div>
     </div>
     
 
+
 <script>
+
+    let UserCreds = JSON.parse(sessionStorage.getItem("user-creds"));
+    let UserInfo = JSON.parse(sessionStorage.getItem("user-info"));
+
+    let MsgHead = document.getElementById('msg');
+    let GreetHead = document.getElementById('greet');
+    let LogoutBtn = document.getElementById('logoutButton');
+
+    let Logout = () => {
+        sessionStorage.removeItem("user-info");
+        window.location.href = 'login.html'
+    }
+
+    let CheckCred = () => {
+        if (!sessionStorage.getItem("user-creds"))
+            window.location.href = 'login.html'
+        else {
+            MsgHead.innerText = `${UserCreds.email}`;
+            GreetHead.innerText = `Welcome ${UserInfo.username}!`;
+        }
+    }
+
+    window.addEventListener('load', CheckCred);
+    LogoutBtn.addEventListener('click', Logout);
+</script>
+
+
+
+    <script>
     document.getElementById("ticketButton").addEventListener("click", function() {
         window.location.href = "ticket.html";
     });
