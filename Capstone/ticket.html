@@ -22,8 +22,8 @@
     <h2 class="h2">General Services Portal</h2>
     <div class="container">
         <div class="ticket-form-container">
-            <button type="home" class="small-button">Home</button>
-            <button type="my-tickets" class="small-button">My Tickets</button>
+            <button class="home-button" id="homeButton">Home</button>
+            <button class="tickets-button" id="ticketsButton">My Tickets</button>
             <form action="" class="ticket-form" method="post">
                 <h3 class="h3">Submit a request</h3>
                 <div class="ticket-input-container">
@@ -105,6 +105,11 @@
             })
         }
       </script>
+      <script>
+        document.getElementById("homeButton").addEventListener("click", function() {
+            window.location.href = "dashboard.html";
+        });
+    </script>
 
 </body>
 </html>
