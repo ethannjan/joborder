@@ -29,7 +29,7 @@
                 <div class="ticket-input-container">
                     <div class="select-container">
                      
-                        <input type="email" placeholder="Enter email" name="email" id="EmailInp" required>
+                        <input type="text" placeholder="Enter id" name="id" id="IDInp" required>
 
                         <select id="ReqInp" required>
                             <option value="" disabled selected hidden>Select Request Type</option>
@@ -53,7 +53,7 @@
 
                         <textarea placeholder="Description" name="description" id="DesInp" required></textarea>
 
-                        <button type="submit" id="AddBtn">Submit</button>
+                        <button id="insert">Submit</button>
                     </div>
                 </div>
             </form>
@@ -62,7 +62,8 @@
     
     <script type="module">
         // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import {getDatabase,ref, child, set} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
       
@@ -76,34 +77,42 @@
           messagingSenderId: "1071229990351",
           appId: "1:1071229990351:web:6d337a8d39f855f085ceba"
         };
+
+        
       
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
+         const db = getDatabase();
+         
+        var insertBtn = document.getElementById('insert');
 
-        import {getDatabase,ref, child, set} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+        function InsertData(){
+    var IDInp = document.getElementById('IDInp').value;
+    var ReqInp = document.getElementById('ReqInp').value;
+    var InqInp = document.getElementById('InqInp').value;
+    var SubInp = document.getElementById('SubInp').value;
+    var locInp = document.getElementById('locInp').value;
+    var DesInp = document.getElementById('DesInp').value;
 
-        const db = getDatabase();
-        let EmailInp = document.getElementById('EmailInp');
-        let ReqInp = document.getElementById('ReqInp');
-        let InqInp = document.getElementById('InqInp');
-        let SubInp = document.getElementById('SubInp');
-        let locInp = document.getElementById('locInp');
-        let DesInp = document.getElementById('DesInp');
 
-        let Addbtn = document.getElementById('Addbtn');
 
-        function AddData(){
-            set(ref(db,'RequestSet/' + EmailInp.value ),{
-                email:EmailInp.value,
-                Details: {Request: ReqInp.value, Inquiry: InqInp.value, Subject: SubInp.value, Location: locInp.value, Description: DesInp.value }
-            }).then(()=>{
-                alert("Data Added Successfully");
-            })
-            .catch(()=>{
-                alert("Unsuccessful");
-                console.log(error);
-            })
-        }
+    set(ref(db,'RequestSet/' + IDInp ),{
+         Request: ReqInp, 
+         Inquiry: InqInp, 
+         Subject: SubInp, 
+         Location: locInp, 
+         Description: DesInp 
+    }).then(()=>{
+        alert("Data Added Successfully");
+    })
+    .catch((error)=>{
+        alert("Unsuccessful");
+        console.log("Error:", error);
+    })
+}
+
+        insertBtn.addEventListener('click',InsertData);
+        
       </script>
 
 </body>
