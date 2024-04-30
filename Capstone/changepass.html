@@ -30,12 +30,46 @@
                 <div class="input-container">
                     <input type="email" id="email" placeholder="Email" name="email" required>
                     <div class="buttoncontainer">
-                        <button type="button" id="searchEmailButton" class="button">Search</button>
+                        <button type="button" id="submitEmailButton" class="button">submit</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+      
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOGLdnSeoUG4JDCVGyL6rmLAPOEG-eNbw",
+            authDomain: "joborder-e2a29.firebaseapp.com",
+            databaseURL: "https://joborder-e2a29-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "joborder-e2a29",
+            storageBucket: "joborder-e2a29.appspot.com",
+            messagingSenderId: "1071229990351",
+            appId: "1:1071229990351:web:6d337a8d39f855f085ceba"
+          };
+      
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        let ForgotPassLabel = document.getElementById('submitEmailButton');
+
+        let ForgotPassword = () => {
+            sendPasswordResetEmail(auth, email.value)
+            .then(()=>{
+                alert("A Password Reset Link has been sent to your email");
+            })
+            .catch((error)=>{
+                console.log(error.code);
+                console.log(error.message);
+            })
+        }
+        
+        ForgotPassLabel.addEventListener('click', ForgotPassword);
+        </script>
+
 
 </body>
 
