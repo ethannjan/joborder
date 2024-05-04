@@ -22,8 +22,10 @@
     <h2 class="h2">General Services Portal</h2>
     <div class="container">
         <div class="ticket-form-container">
+            <div class="buttoncontainer">
             <button class="home-button" id="homeButton">Home</button>
             <button class="tickets-button" id="ticketsButton">My Tickets</button>
+            </div>
             <form action="" class="ticket-form" method="post">
                 <h3 class="h3">Submit a request</h3>
                 <div class="ticket-input-container">
@@ -118,6 +120,11 @@
       <script>
         document.getElementById("homeButton").addEventListener("click", function() {
             window.location.href = "dashboard.html";
+        });
+    </script>
+    <script>
+        document.getElementById("ticketsButton").addEventListener("click", function() {
+            window.location.href = "mytickets.html";
         });
     </script>
 

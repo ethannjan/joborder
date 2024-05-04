@@ -8,7 +8,6 @@ body {
 
 .h1 {
     font-family: 'Inter', sans-serif; 
-    color:#ffffff;
 }
 
 .h2 {
@@ -27,7 +26,6 @@ body {
 
 header {
     text-align: center; /* Center align the content within the header */
-    background-color: #922B21; 
     padding: 10px; 
 }
 
@@ -145,10 +143,16 @@ header {
         margin-bottom: 5px;
     }
 
+    .buttoncontainer {
+        display: flex;
+        justify-content: flex-start; /* Align buttons to the left */
+        margin-left: 20px; /* Add margin to move the buttons to the left */
+    }
+    
     .home-button,
     .tickets-button {
         width: 120px; /* Adjust width as needed */
-        display: inline-block; /* Display buttons inline */
+        margin-right: 10px; /* Add margin between buttons */
     }
     
     

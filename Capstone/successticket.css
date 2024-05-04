@@ -6,7 +6,6 @@ body {
 .h1 {
     font-family: 'Inter', sans-serif;
     margin-top: 100px;
-    color:#ffffff
 }
 
 .h2 {
@@ -52,7 +51,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #922B21; 
     padding: 10px; 
 }
 
