@@ -1,0 +1,105 @@
+body {
+    background-color: #FFD700;
+    margin: 0; /* Remove default body margin */
+    overflow: hidden;
+   
+    
+}
+
+.h1 {
+    font-family: 'Inter', sans-serif; 
+}
+
+.h2 {
+    font-family: 'Inter', sans-serif; 
+    font-weight: bold;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+.h3 {
+    font-family: 'Inter', sans-serif; 
+    font-weight: bold;
+    text-align: center;
+    color: #800000;
+}
+
+header {
+    text-align: center; /* Center align the content within the header */
+    padding: 10px; 
+}
+
+.header-content {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center align items vertically */
+    justify-content: center; /* Center align items horizontally */
+}
+
+.logo {
+    max-width: 130px; /* Set maximum width for the logo */
+    margin-right: 20px; /* Add some space between the logo and the heading text */
+}
+
+.h1 {
+    margin: 0; /* Remove default margins for the heading */
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin-top: 300px;
+}
+    button {
+        padding: 10px 20px;
+        background-color: #800000; /* Change to your desired color */
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: #922B21;
+    }
+
+    .view-container {
+        width: 100%;
+        max-width: 800px;
+        padding: 20px; /* Add padding inside the container */
+        color: #800000;
+        background-color: #ffffff; /* Red square border */
+        text-align: center; /* Center align content */
+        border: 2px solid;
+        border-radius: 10px; /* Add border radius for rounded corners */
+        box-sizing: border-box; /* Include padding and border in the width */
+        margin-top: -350px;
+        overflow-x: auto;
+    }
+
+    .buttoncontainer {
+        display: flex;
+        justify-content: flex-start; /* Align buttons to the left */
+        margin-left: 20px; /* Add margin to move the buttons to the left */
+    }
+    
+    .home-button{
+        width: 120px; /* Adjust width as needed */
+        margin-right: 10px; /* Add margin between buttons */
+    }
+    .ticket-table {
+        width: 100%;
+        border-collapse: collapse; /* Collapse borders between cells */
+    }
+    
+    .ticket-table th, .ticket-table td {
+        padding: 10px;
+        border: 1px solid #fff; /* Add borders around cells */
+        font-family: 'Inter', sans-serif; 
+        font-size: 18px;
+    }
+    
+    .ticket-table th:nth-child(2) {
+        text-align: center; /* Center-align the Tickets column */
+    }
