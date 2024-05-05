@@ -172,7 +172,38 @@ header {
         box-sizing: border-box; /* Ensures padding and border are included in the width */
     }
     
+    label[for="imageInput"] {
+        background-color: white; /* Adjust the color as needed */
+        color: black;
+        padding: 15px 15px; /* Increase padding for a larger button */
+        font-size: 15px; /* Increase font size for larger text */
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        display: inline-block;
+        font-family: 'Inter', sans-serif;
+        font-weight: bold;
+        width: 150px; /* Set a specific width if needed */
+        height: 10px;
+        text-align: center;
+    }
     
+    label[for="imageInput"]:hover {
+        background-color: #FFD700;
+        /* Lighter shade for hover effect */
+    }
 
+    #fileChosen {
+        font-weight: bold;
+        font-size: 15px; /* Increase font size to match the button */
+        color:  #FFD700;
+        margin-left: 10px; /* Margin to separate it from the button */
+        vertical-align: middle; /* Align vertically with the button */
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .file-upload{
+        text-align: left;
+    }
 
 

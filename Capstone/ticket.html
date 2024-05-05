@@ -15,7 +15,7 @@
 
     <header>
         <div class="header-content">
-            <img src="C:\Users\ajceq\OneDrive\Desktop\Capstone\joborder\Capstone\images\logo.png" class="logo">
+            <img src="images/logo.png" class="logo">
             <h1 class="h1">CEBU INSTITUTE OF TECHNOLOGY - UNIVERSITY</h1>
         </div>
     </header>
@@ -56,6 +56,12 @@
                         <input type="datetime-local" id="datetime" name="datetime">
                         <textarea placeholder="Details of the Request" name="description" id="DesInp" required></textarea>
 
+                        <div class="file-upload">
+                            <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                            <label for="imageInput">Choose File</label>
+                            <span id="fileChosen">No file chosen</span>
+                        </div>
+
                         <button id="Submitbtn" >Submit</button>
                     </div>
                 </div>
@@ -66,7 +72,9 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-    
+        import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        
         // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyDOGLdnSeoUG4JDCVGyL6rmLAPOEG-eNbw",
@@ -80,25 +88,39 @@
         
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const db = getDatabase();
-    
+        const db = getDatabase(app);
+        const storage = getStorage(app);
+        const auth = getAuth(app);
+        
         document.addEventListener('DOMContentLoaded', function() {
-    const submitButton = document.getElementById('Submitbtn');
-    const ticketForm = document.querySelector('.ticket-form');
+            const submitButton = document.getElementById('Submitbtn');
+            const ticketForm = document.querySelector('.ticket-form');
+        
+            ticketForm.addEventListener('submit', function(event) {
+    event.preventDefault();
 
-    ticketForm.addEventListener('submit', function(event) {
-        event.preventDefault();
+    // Check if user is logged in
+    const user = auth.currentUser;
+    if (!user) {
+        alert("Please log in to submit a ticket.");
+        console.error("No user is signed in.");
+        return; // Stop further execution if no user is logged in
+    }
 
-        // Check if user is logged in
-        const userInfo = JSON.parse(sessionStorage.getItem("user-info"));
-        if (!userInfo) {
-            alert("Please log in to submit a ticket.");
-            return; // Stop further execution if no user is logged in
-        }
+    const imageFile = document.getElementById('imageInput').files[0]; // Assumes there's an input with id="imageInput"
+    let uploadPromise;
 
-        // If logged in, proceed to submit the ticket under the user's ID
-        const userID = JSON.parse(sessionStorage.getItem("user-creds")).uid; // get user UID from session storage
+    if (imageFile) {
+        const imageStorageRef = storageRef(storage, `ticket_images/${user.uid}/${imageFile.name}`);
+        uploadPromise = uploadBytes(imageStorageRef, imageFile).then((snapshot) => {
+            console.log("Image uploaded successfully");
+            return getDownloadURL(snapshot.ref);
+        });
+    } else {
+        uploadPromise = Promise.resolve("No image uploaded"); // Default text indicating no image was provided
+    }
 
+    uploadPromise.then((imageUrl) => {
         const Priority = document.getElementById('Priority').value;
         const WorkType = document.getElementById('WorkType').value;
         const ReqType = document.getElementById('ReqType').value;
@@ -107,22 +129,27 @@
         const DesInp = document.getElementById('DesInp').value;
 
         // Firebase Database path updated to store tickets under user's UID
-        push(ref(db, 'users/' + userID + '/tickets/'), {
+        push(ref(db, 'users/' + user.uid + '/tickets/'), {
             priority: Priority,
             worktype: WorkType,
             requesttype: ReqType,
             location: locInp,
             date: datetime,
-            description: DesInp
+            description: DesInp,
+            imageUrl: imageUrl  // This could be an image URL or "No image uploaded"
         }).then(() => {
-            alert("Ticket Added Successfully");
+            window.location.href = "successticket.html";
             ticketForm.reset();
         }).catch((error) => {
             alert("Submit Unsuccessful");
-            console.error(error);
+            console.error("Error submitting ticket: ", error);
         });
-    });
-});
+    }).catch((error) => {
+        console.error("Failed to upload image", error);
+        alert("Failed to upload image: " + error.message);
+                 });
+            });
+        });
     </script>
       <script>
         document.getElementById("homeButton").addEventListener("click", function() {
@@ -135,7 +162,13 @@
             window.location.href = "mytickets.html";
         });
     </script>
-
+    
+<script>
+    document.getElementById('imageInput').addEventListener('change', function() {
+        const fileChosen = document.getElementById('fileChosen');
+        fileChosen.textContent = this.files.length > 0 ? this.files[0].name : 'No file chosen';
+    });
+</script>
 
 </body>
 </html>

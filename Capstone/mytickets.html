@@ -12,7 +12,7 @@
 <body>
     <header>
         <div class="header-content">
-            <img src="logo.png" class="logo"> <!-- Updated the src to a relative path -->
+            <img src="images/logo.png" class="logo">
             <h1 class="h1">CEBU INSTITUTE OF TECHNOLOGY - UNIVERSITY</h1>
         </div>
     </header>
@@ -44,6 +44,7 @@
             <p id="ticketLocation">Location: </p>
             <p id="ticketDate">Date: </p>
             <p id="ticketDescription">Description: </p>
+            <img id="ticketImage" src="" style="width:100%;height:auto;"> <!-- Image will be shown here -->
         </div>
     </div>
 
@@ -96,8 +97,16 @@
     document.getElementById('ticketDate').textContent = 'Date: ' + (ticketData.date || 'Not specified');
     document.getElementById('ticketRequestType').textContent = 'Request Type: ' + (ticketData.requesttype || 'Not specified');
     document.getElementById('ticketWorkType').textContent = 'Work Type: ' + (ticketData.worktype || 'Not specified');
-    document.getElementById('ticketModal').style.display = 'block';
+    if (ticketData.imageUrl) {
+        document.getElementById('ticketImage').src = ticketData.imageUrl;
+        document.getElementById('ticketImage').alt = "";
+    } else {
+        document.getElementById('ticketImage').src = ""; // You can also provide a default placeholder image URL here
+        document.getElementById('ticketImage').alt = "No image uploaded";
+        document.getElementById('ticketImage').style.display = 'none'; // Optionally hide the image element if no image is available
     }
+    document.getElementById('ticketModal').style.display = 'block';
+}
 
     document.querySelector('.close-button').onclick = function() {
         document.getElementById('ticketModal').style.display = 'none';

@@ -151,3 +151,9 @@ header {
     text-decoration: none;
     cursor: pointer;
 }
+
+#ticketImage {
+    max-width: 20%;
+    height: auto;
+    margin-top: 20px; /* Adds some space above the image */
+}
