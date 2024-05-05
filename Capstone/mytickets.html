@@ -33,6 +33,21 @@
             </table>
         </div>
     </div>
+
+    <div id="ticketModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2>Ticket Details</h2>
+            <p id="ticketPriority">Priority: </p>
+            <p id="ticketLocation">Location: </p>
+            <p id="ticketDescription">Description: </p>
+            <p id="ticketDate">Date: </p>
+            <p id="ticketRequestType">Request Type: </p>
+            <p id="ticketWorkType">Work Type: </p>
+        </div>
+    </div>
+
+
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
         import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
@@ -52,25 +67,49 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-     window.onload = function() {
+        window.onload = function() {
     const userId = JSON.parse(sessionStorage.getItem("user-creds")).uid;
     const userTicketsRef = ref(db, 'users/' + userId + '/tickets/');
     onValue(userTicketsRef, (snapshot) => {
         if (snapshot.exists()) {
             snapshot.forEach((childSnapshot) => {
                 const ticketData = childSnapshot.val();
-                    console.log("Ticket data:", ticketData);
-                    const row = document.createElement('tr');
-                    row.innerHTML = `<td>${ticketData.priority}</td><td>${ticketData.location}</td><td>${ticketData.description}</td>`;
-                    document.querySelector('.ticket-table').appendChild(row);
-                });
-            } else {
-                console.log("No tickets found for user:", userId);
-            }
-        }, function(error) {
-            console.error("Failed to fetch tickets:", error);
-        });
+                console.log("Ticket data:", ticketData);
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${ticketData.priority}</td><td>${ticketData.location}</td><td>${ticketData.description}</td><td><button class='view-button'>View Ticket</button></td>`;
+                document.querySelector('.ticket-table').appendChild(row);
+                row.lastElementChild.firstElementChild.onclick = function() {
+                    showModal(ticketData);
+                };
+            });
+        } else {
+            console.log("No tickets found for user:", userId);
+        }
+    }, function(error) {
+        console.error("Failed to fetch tickets:", error);
+    });
+
+    function showModal(ticketData) {
+    document.getElementById('ticketPriority').textContent = 'Priority: ' + (ticketData.priority || 'Not specified');
+    document.getElementById('ticketLocation').textContent = 'Location: ' + (ticketData.location || 'Not specified');
+    document.getElementById('ticketDescription').textContent = 'Description: ' + (ticketData.description || 'Not specified');
+    document.getElementById('ticketDate').textContent = 'Date: ' + (ticketData.date || 'Not specified');
+    document.getElementById('ticketRequestType').textContent = 'Request Type: ' + (ticketData.requesttype || 'Not specified');
+    document.getElementById('ticketWorkType').textContent = 'Work Type: ' + (ticketData.worktype || 'Not specified');
+    document.getElementById('ticketModal').style.display = 'block';
+    }
+
+    document.querySelector('.close-button').onclick = function() {
+        document.getElementById('ticketModal').style.display = 'none';
     };
+
+    window.onclick = function(event) {
+        if (event.target === document.getElementById('ticketModal')) {
+            document.getElementById('ticketModal').style.display = 'none';
+        }
+    };
+};
+
 </script>
 <script>
     document.getElementById("homeButton").addEventListener("click", function() {
