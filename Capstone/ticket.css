@@ -17,10 +17,17 @@ body {
     margin-top: 100px;
     margin-bottom: 50px;
 }
-.h3 {
+.h3{
     font-family: 'Inter', sans-serif; 
     font-weight: bold;
     text-align: center;
+    color: #FFD700;
+}
+
+label[for="datetime"]{
+    font-family: 'Inter', sans-serif; 
+    font-weight: bold;
+    text-align: left;
     color: #FFD700;
 }
 
@@ -155,6 +162,14 @@ header {
         margin-right: 10px; /* Add margin between buttons */
     }
     
+    input[type="datetime-local"] {
+        width: 100%;        /* Ensures the input takes the full width of its container */
+        padding: 10px;      /* Adds padding inside the input for better text visibility */
+        margin-bottom: 15px; /* Adds consistent spacing below the input */
+        border: 1px solid #ccc; /* Standard border to match other inputs */
+        border-radius: 5px; /* Adds rounded corners to match other inputs */
+        box-sizing: border-box; /* Ensures padding and border are included in the width */
+    }
     
     
 

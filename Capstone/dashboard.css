@@ -74,7 +74,7 @@ body {
 .h3 {
     font-family: 'Inter', sans-serif;
     font-weight: bold;
-    text-align: center;
+    text-align: center !important;
     color: #FFD700;
 }
 
@@ -104,7 +104,6 @@ body {
 }
 
 .user-info {
-    text-align: end;
-    margin-top: 10px;
+    text-align: center;
     margin-right: 50px;
 }

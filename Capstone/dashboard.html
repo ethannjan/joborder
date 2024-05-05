@@ -19,9 +19,8 @@
             <h1 class="h1">CEBU INSTITUTE OF TECHNOLOGY - UNIVERSITY</h1>
         </div>
     </header>
-    <!--<div class="user-info">
+    <div class="user-info">
         <h3 id="greet"></h3>
-        <h3 id="msg"></h3>-->
     </div>
     <h2 class="h2">General Services Portal</h2>
     <div class="container">
@@ -36,28 +35,31 @@
 
 <script>
 
-    let UserCreds = JSON.parse(sessionStorage.getItem("user-creds"));
+window.addEventListener('load', () => {
     let UserInfo = JSON.parse(sessionStorage.getItem("user-info"));
 
-    let MsgHead = document.getElementById('msg');
-    let GreetHead = document.getElementById('greet');
-    let LogoutBtn = document.getElementById('logoutButton');
-
-    let Logout = () => {
-        sessionStorage.removeItem("user-info");
-        window.location.href = 'login.html'
+    if (!UserInfo) {
+        console.error("User information is not available.");
+        window.location.href = 'login.html';
+        return;
     }
 
-    let CheckCred = () => {
-        if (!sessionStorage.getItem("user-creds"))
-            window.location.href = 'login.html'
-        else {
-            MsgHead.innerText = `${UserCreds.email}`;
-            GreetHead.innerText = `Welcome ${UserInfo.username}!`;
-        }
-    }
+    document.getElementById('greet').innerText = `Welcome ${UserInfo.username}!`;
 
-    window.addEventListener('load', CheckCred);
+    document.getElementById('logoutButton').addEventListener('click', function() {
+        sessionStorage.clear();  // Clear all session storage
+        window.location.href = 'login.html';
+    });
+
+    document.getElementById("ticketButton").addEventListener("click", function() {
+        window.location.href = "ticket.html";
+    });
+
+    document.getElementById("viewButton").addEventListener("click", function() {
+        window.location.href = "mytickets.html";
+    });
+});
+
     LogoutBtn.addEventListener('click', Logout);
 </script>
 
