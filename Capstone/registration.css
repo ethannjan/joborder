@@ -22,7 +22,7 @@ body {
     align-items: center;
 }
 
-.button, .signup-button {
+.button, .signup-button, .login-button {
     margin: 0 5px; /* Add some margin for spacing between buttons */
     background-color: #FFD700;
     color: #000000;

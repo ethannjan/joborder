@@ -32,7 +32,7 @@
                   </div>
                     <div class=" buttoncontainer">
                     <input type="submit" id="signup" name="Signup" value="Sign up" class="signup-button">
-                    <!--<input type="submit" id="login" name="Login" value="Login" class="login-button">-->
+                    <input type="submit" id="login" name="Login" value="Login" class="login-button">
                       </div>
                 </div>
             </div>
@@ -89,6 +89,12 @@
   alert(errorMessage);
   // ..
 });
+  });
+</script>
+
+<script>
+  document.getElementById("login").addEventListener("click", function() {
+      window.location.href = "login.html";
   });
 </script>
 </html>

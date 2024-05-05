@@ -1,6 +1,7 @@
 body {
     background-color: #FFD700;
     margin: 0;
+    overflow: hidden; /* This prevents the scrollbar at the page level */
 }
 
 .h1 {
@@ -101,6 +102,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden; /* This prevents scrollbars within the container */
 }
 
 .user-info {

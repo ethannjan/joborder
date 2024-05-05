@@ -30,6 +30,13 @@
                 <h3 class="h3">Submit a request</h3>
                 <div class="ticket-input-container">
                     <div class="select-container">
+
+                        <select id="Priority" required>
+                            <option value="" disabled selected hidden>Select Priority</option>
+                            <option value="Emergency">Emergency</option>
+                            <option value="Non-Emergency">Non-Emergency</option>
+                        </select>
+
                         <select id="WorkType" required>
                             <option value="" disabled selected hidden>Select Work Type</option>
                             <option value="Plumbing">Plumbing</option>
@@ -92,6 +99,7 @@
         // If logged in, proceed to submit the ticket under the user's ID
         const userID = JSON.parse(sessionStorage.getItem("user-creds")).uid; // get user UID from session storage
 
+        const Priority = document.getElementById('Priority').value;
         const WorkType = document.getElementById('WorkType').value;
         const ReqType = document.getElementById('ReqType').value;
         const locInp = document.getElementById('locInp').value;
@@ -100,6 +108,7 @@
 
         // Firebase Database path updated to store tickets under user's UID
         push(ref(db, 'users/' + userID + '/tickets/'), {
+            priority: Priority,
             worktype: WorkType,
             requesttype: ReqType,
             location: locInp,
