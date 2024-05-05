@@ -4,18 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Order - My Tickets</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@240&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="mytickets.css">
 </head>
 <body>
-
     <header>
         <div class="header-content">
-            <img src="C:\Users\ajceq\OneDrive\Desktop\Capstone\joborder\Capstone\images\logo.png" class="logo">
+            <img src="logo.png" class="logo"> <!-- Updated the src to a relative path -->
             <h1 class="h1">CEBU INSTITUTE OF TECHNOLOGY - UNIVERSITY</h1>
         </div>
     </header>
@@ -23,25 +20,64 @@
     <div class="container">
         <div class="view-container">
             <div class="buttoncontainer">
-            <button class="home-button" id="homeButton">Home</button>
+                <button class="home-button" id="homeButton">Home</button>
             </div>
             <h3 class="h3">My Tickets</h3>
             <table class="ticket-table">
                 <tr>
                     <th>Priority</th>
-                    <th>Tickets</th>
+                    <th>Location</th>
+                    <th>Description</th>
                 </tr>
-                <!-- Add ticket rows dynamically here -->
+                <!-- Rows will be added here dynamically -->
             </table>
         </div>
     </div>
-
-
-   <script>
-        document.getElementById("homeButton").addEventListener("click", function() {
-            window.location.href = "dashboard.html";
-        });
-    </script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
+        import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
     
-    </body>
-    </html>
+        // Initialize Firebase (Ensure that you have updated this config with your own)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOGLdnSeoUG4JDCVGyL6rmLAPOEG-eNbw",
+            authDomain: "joborder-e2a29.firebaseapp.com",
+            databaseURL: "https://joborder-e2a29-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "joborder-e2a29",
+            storageBucket: "joborder-e2a29.appspot.com",
+            messagingSenderId: "1071229990351",
+            appId: "1:1071229990351:web:6d337a8d39f855f085ceba"
+        };
+
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+     window.onload = function() {
+    const userId = JSON.parse(sessionStorage.getItem("user-creds")).uid;
+    const userTicketsRef = ref(db, 'users/' + userId + '/tickets/');
+    onValue(userTicketsRef, (snapshot) => {
+        if (snapshot.exists()) {
+            snapshot.forEach((childSnapshot) => {
+                const ticketData = childSnapshot.val();
+                    console.log("Ticket data:", ticketData);
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${ticketData.priority}</td><td>${ticketData.location}</td><td>${ticketData.description}</td>`;
+                    document.querySelector('.ticket-table').appendChild(row);
+                });
+            } else {
+                console.log("No tickets found for user:", userId);
+            }
+        }, function(error) {
+            console.error("Failed to fetch tickets:", error);
+        });
+    };
+</script>
+<script>
+    document.getElementById("homeButton").addEventListener("click", function() {
+        window.location.href = "dashboard.html";
+    });
+</script>
+
+
+</body>
+</html>
