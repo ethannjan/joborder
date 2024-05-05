@@ -28,98 +28,96 @@
                 <h3 class="h3">Submit a request</h3>
                 <div class="ticket-input-container">
                     <div class="select-container">
-                     
-                        <input type="text" placeholder="Enter id" name="id" id="IDInp" required>
+                        <select id="WorkType" required>
+                            <option value="" disabled selected hidden>Select Work Type</option>
+                            <option value="Plumbing">Plumbing</option>
+                            <option value="Carpentry">Carpentry/Masonry/Steel Works</option>
+                            <option value="Electrical">Electrical</option>
+                            <option value="Electro-Mech">Electro-Mechanical</option>
+                        </select>
 
-                        <select id="ReqInp" required>
-                            <option value="" disabled selected hidden>Select Request Type</option>
-                            <option value="Maintenance">Maintenance</option>
-                            <option value="Repair">Repair</option>
+                        <select id="ReqType" required>
+                            <option value="" disabled selected hidden >Select Type of Request</option>
+                          <option value="Repair/Maintenance">Repair/Maintenance</option>
                             <option value="Installation">Installation</option>
-                            <option value="Other">Other</option>
                         </select>
-
-                        <select id="InqInp" required>
-                            <option value="" disabled selected hidden >Select Type of Inquiry</option>
-                          <option value="Technical">Technical</option>
-                            <option value="General">General</option>
-                            <option value="Billing">Billing</option>
-                            <option value="Other">Other</option>
-                        </select>
-
-                        <input type="text" placeholder="Subject" name="subject" id="SubInp" required>
-
+ 
                         <input type="text" placeholder="Location" name="location" id="locInp" required>
+                        <label for="datetime">Select a Date and Time:</label>
+                        <input type="datetime-local" id="datetime" name="datetime">
+                        <textarea placeholder="Details of the Request" name="description" id="DesInp" required></textarea>
 
-                        <textarea placeholder="Description" name="description" id="DesInp" required></textarea>
-
-                        <button id="insert">Submit</button>
+                        <button id="Submitbtn" >Submit</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import {getDatabase,ref, child, set} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-        
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
+        import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+    
         // Your web app's Firebase configuration
         const firebaseConfig = {
-          apiKey: "AIzaSyDOGLdnSeoUG4JDCVGyL6rmLAPOEG-eNbw",
-          authDomain: "joborder-e2a29.firebaseapp.com",
-          databaseURL: "https://joborder-e2a29-default-rtdb.asia-southeast1.firebasedatabase.app",
-          projectId: "joborder-e2a29",
-          storageBucket: "joborder-e2a29.appspot.com",
-          messagingSenderId: "1071229990351",
-          appId: "1:1071229990351:web:6d337a8d39f855f085ceba"
+            apiKey: "AIzaSyDOGLdnSeoUG4JDCVGyL6rmLAPOEG-eNbw",
+            authDomain: "joborder-e2a29.firebaseapp.com",
+            databaseURL: "https://joborder-e2a29-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "joborder-e2a29",
+            storageBucket: "joborder-e2a29.appspot.com",
+            messagingSenderId: "1071229990351",
+            appId: "1:1071229990351:web:6d337a8d39f855f085ceba"
         };
-
         
-      
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-         const db = getDatabase();
-         
-        var insertBtn = document.getElementById('insert');
+        const db = getDatabase();
+    
+        document.addEventListener('DOMContentLoaded', function() {
+    const submitButton = document.getElementById('Submitbtn');
+    const ticketForm = document.querySelector('.ticket-form');
 
-        function InsertData(){
-    var IDInp = document.getElementById('IDInp').value;
-    var ReqInp = document.getElementById('ReqInp').value;
-    var InqInp = document.getElementById('InqInp').value;
-    var SubInp = document.getElementById('SubInp').value;
-    var locInp = document.getElementById('locInp').value;
-    var DesInp = document.getElementById('DesInp').value;
+    ticketForm.addEventListener('submit', function(event) {
+        event.preventDefault();
 
+        // Check if user is logged in
+        const userInfo = JSON.parse(sessionStorage.getItem("user-info"));
+        if (!userInfo) {
+            alert("Please log in to submit a ticket.");
+            return; // Stop further execution if no user is logged in
+        }
 
+        // If logged in, proceed to submit the ticket under the user's ID
+        const userID = JSON.parse(sessionStorage.getItem("user-creds")).uid; // get user UID from session storage
 
-    set(ref(db,'RequestSet/' + IDInp ),{
-         Request: ReqInp, 
-         Inquiry: InqInp, 
-         Subject: SubInp, 
-         Location: locInp, 
-         Description: DesInp 
-    }).then(()=>{
-        alert("Data Added Successfully");
-    })
-    .catch((error)=>{
-        alert("Unsuccessful");
-        console.log("Error:", error);
-    })
-}
+        const WorkType = document.getElementById('WorkType').value;
+        const ReqType = document.getElementById('ReqType').value;
+        const locInp = document.getElementById('locInp').value;
+        const datetime = document.getElementById('datetime').value;
+        const DesInp = document.getElementById('DesInp').value;
 
-        insertBtn.addEventListener('click',InsertData);
-        
-      </script>
+        // Firebase Database path updated to store tickets under user's UID
+        push(ref(db, 'users/' + userID + '/tickets/'), {
+            worktype: WorkType,
+            requesttype: ReqType,
+            location: locInp,
+            date: datetime,
+            description: DesInp
+        }).then(() => {
+            alert("Ticket Added Successfully");
+            ticketForm.reset();
+        }).catch((error) => {
+            alert("Submit Unsuccessful");
+            console.error(error);
+        });
+    });
+});
+    </script>
       <script>
         document.getElementById("homeButton").addEventListener("click", function() {
             window.location.href = "dashboard.html";
         });
     </script>
-
+    
 </body>
 </html>
